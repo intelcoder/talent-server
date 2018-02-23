@@ -1,0 +1,30 @@
+{
+  "name": "express-grapheql-starter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon app/index.js --exec babel-node --presets es2015,stage-3",
+    "build": "rimraf dist/ && babel lib -d dist --presets es2015,stage-3",
+    "serve": "node dist/index.js"
+  },
+  "dependencies": {
+    "apollo-server-express": "^1.3.2",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "compression": "^1.7.2",
+    "connect-query": "^1.0.0",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.0",
+    "express": "^4.16.2",
+    "graphql": "^0.13.1",
+    "mongoose": "^5.0.6",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.15.1",
+    "passport": "^0.4.0",
+    "ramda": "^0.25.0",
+    "rimraf": "^2.6.2",
+    "winston": "^2.4.0"
+  }
+}
