@@ -5,9 +5,10 @@ import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 import Sequelize from 'sequelize'
+require('dotenv').config()
 
 const sequelize = new Sequelize('postgres', 'postgres', 'fiddler', {
-  host: '192. 168.99.100',
+  host: process.env.POSTGRES_HOST,
   dialect: 'postgres',
   pool: {
     max: 5,
