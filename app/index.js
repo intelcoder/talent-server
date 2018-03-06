@@ -4,6 +4,29 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
+import Sequelize from 'sequelize'
+
+const sequelize = new Sequelize('postgres', 'postgres', 'fiddler', {
+  host: '192. 168.99.100',
+  dialect: 'postgres',
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
+})
+
+sequelize
+.authenticate()
+.then(() => {
+  console.log('Connection has been established successfully.');
+})
+.catch(err => {
+  console.error('Unable to connect to the database:', err);
+});
+
+
 
 const app = express()
 app.use(logger('combined'))
