@@ -5,20 +5,32 @@ const User = db.define('user', {
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
+    validate: {
+      is: ["^[a-zA-Z]+(([',. -][a-zA-Z\s])?[a-zA-Z]*)*$",'i'],
+    },
   },
   lastName:{
     type: Sequelize.STRING,
     allowNull: false,
+    validate: {
+      is: ["^[a-zA-Z]+(([',. -][a-zA-Z\s])?[a-zA-Z]*)*$",'i'], 
+    },
   },
-  fullName: {
-    type: Sequelize.STRING,
+  password: {
+    type: Sequelize.STRING(255),
     allowNull: false,
+    validate: {
+      len: [8, 255],
+    },
   },
-  password: Sequelize.STRING,
   email: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
+    validate: {
+      isEmail: true,
+      notEmpty: true,
+    },
   },
   isActive: {
     type: Sequelize.BOOLEAN,
@@ -31,5 +43,12 @@ const User = db.define('user', {
   isAnonymous: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
-  } 
+  },
+},
+{
+  getterMethods: {
+    fullName() {
+      return this.firstName + ' ' + this.lastName
+    }
+  }
 })
