@@ -7,7 +7,7 @@ import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 import Sequelize from 'sequelize'
 require('dotenv').config()
 
-export const sequelize = new Sequelize('postgres', 'postgres', 'fiddler', {
+export const db = new Sequelize('postgres', 'postgres', 'fiddler', {
   host: process.env.POSTGRES_HOST,
   dialect: 'postgres',
   pool: {
@@ -18,13 +18,13 @@ export const sequelize = new Sequelize('postgres', 'postgres', 'fiddler', {
   },
 })
 
-sequelize
+db
 .authenticate()
 .then(() => {
   console.log('Connection has been established successfully.');
 })
 .catch(err => {
-  console.error('Unable to connect to the database:', err);
+  console.error('Unable to connect to the database:');
 });
 
 

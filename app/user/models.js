@@ -1,7 +1,7 @@
-import sequalize from 'App/index'
-const Sequelize = require('sequelize');
+import { db } from 'App/index'
+import Sequelize from 'sequelize'
 
-const User = sequalize.define('user', {
+const User = db.define('user', {
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
