@@ -1,3 +1,4 @@
+import sequalize from 'App/index'
 const Sequelize = require('sequelize');
 
 const User = sequalize.define('user', {

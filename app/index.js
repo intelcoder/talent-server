@@ -7,7 +7,7 @@ import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 import Sequelize from 'sequelize'
 require('dotenv').config()
 
-const sequelize = new Sequelize('postgres', 'postgres', 'fiddler', {
+export const sequelize = new Sequelize('postgres', 'postgres', 'fiddler', {
   host: process.env.POSTGRES_HOST,
   dialect: 'postgres',
   pool: {
