@@ -1,4 +1,4 @@
-import { db } from 'App/index'
+import db from 'App/db'
 import Sequelize from 'sequelize'
 
 const User = db.define('user', {
@@ -51,4 +51,8 @@ const User = db.define('user', {
       return this.firstName + ' ' + this.lastName
     }
   }
-})
+})  
+
+User.sync()
+
+export default User

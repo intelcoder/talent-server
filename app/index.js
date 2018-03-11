@@ -4,30 +4,10 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
-import Sequelize from 'sequelize'
+import db from './db'
+import './registerModels'
+
 require('dotenv').config()
-
-export const db = new Sequelize('postgres', 'postgres', 'fiddler', {
-  host: process.env.POSTGRES_HOST,
-  dialect: 'postgres',
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
-  },
-})
-
-db
-.authenticate()
-.then(() => {
-  console.log('Connection has been established successfully.');
-})
-.catch(err => {
-  console.error('Unable to connect to the database:');
-});
-
-
 
 const app = express()
 app.use(logger('combined'))
@@ -40,3 +20,4 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
+

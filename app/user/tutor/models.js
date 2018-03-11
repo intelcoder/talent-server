@@ -1,6 +1,6 @@
 import Sequalize from 'sequelize'
-import { db } from 'App'
-import User from 'App/User'
+import db from 'App/db'
+import User from 'App/User/models'
 
 const Tutor = db.define('tutor', {
   displayName: {
@@ -24,7 +24,7 @@ const Tutor = db.define('tutor', {
     defaultValue: false,
   },
 })
-
+Tutor.sync()
 Tutor.belongsTo(User)
 
 export default Tutor
