@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
+import schema from './schemas'
 import db from './db'
 import './registerModels'
 
@@ -15,6 +16,13 @@ app.use(bodyParser.json())
 // app.use('/graphql', bodyParser.json(), graphqlExpress({ schema: myGraphQLSchema }));
 // app.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
+app.use('/graphql', bodyParser.json(), graphqlExpress({
+  schema 
+}));
+
+app.use('/graphiql', graphiqlExpress({
+  endpointURL: '/graphql'
+}));
 
 const PORT = 3000;
 app.listen(PORT, () => {

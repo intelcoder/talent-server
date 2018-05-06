@@ -1,19 +1,28 @@
-import db from 'App/db'
+import bCrypt from 'bcrypt'
 import Sequelize from 'sequelize'
+import XRegExp from 'xregexp'
+import 'Scripts/xregexp-all'
+import db from 'App/db'
 
+const nameRegex = XRegExp('^[\\p{L} \'.-]+$');
+const nameValidation = (value, next) => {
+  const isValid = XRegExp.exec(value, nameRegex)
+  if(!isValid) return next("Name validation fail")
+  next()
+}
 const User = db.define('user', {
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      is: ["^[a-zA-Z]+(([',. -][a-zA-Z\s])?[a-zA-Z]*)*$",'i'],
+      is: nameValidation,
     },
   },
   lastName:{
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      is: ["^[a-zA-Z]+(([',. -][a-zA-Z\s])?[a-zA-Z]*)*$",'i'], 
+      is: nameValidation,
     },
   },
   password: {
@@ -31,6 +40,9 @@ const User = db.define('user', {
       isEmail: true,
       notEmpty: true,
     },
+  },
+  roles: {
+    type: Sequelize.STRING,
   },
   isActive: {
     type: Sequelize.BOOLEAN,
@@ -52,6 +64,17 @@ const User = db.define('user', {
     }
   }
 })  
+
+User.beforeCreate(async (user, options) => {
+  try {
+   const hash = await bCrypt.hashSync(user.password, bCrypt.genSaltSync(8))
+   user.password = hash;
+   return user
+  } catch(e) {
+    console.log(e)
+    return e
+  }
+});
 
 User.sync()
 

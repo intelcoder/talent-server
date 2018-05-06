@@ -4,7 +4,8 @@
     ["module-resolver", {
       "root": ["./"],
       "alias": {
-        "App": "./app"
+        "App": "./app",
+        "User": "./app/user"
       }
     }]
   ]
