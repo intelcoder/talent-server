@@ -2,10 +2,12 @@ import {
   mergeSchemas,
 } from 'graphql-tools'
 
-import userShcema from './user/schema'
+import userSchema from './user/schema'
+import tutorSchema from './user/tutor/schema'
 
 export default mergeSchemas({
   schemas: [
-    userShcema,
+    userSchema,
+    tutorSchema,
   ],
 })

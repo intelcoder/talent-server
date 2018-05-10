@@ -76,6 +76,5 @@ User.beforeCreate(async (user, options) => {
   }
 });
 
-User.sync()
 
 export default User
