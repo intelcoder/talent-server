@@ -61,20 +61,16 @@ const resolvers = {
   Mutation: {
     createTutor: async (root, args) => {
       const user = await User.findOne(args.id)
-    
       if(user) {
-       
         const tutor = await Tutor.create({
           displayName: args.displayName,
           briefIntro: args.briefIntro,
           resume: 'setset'
         })
-  
         const result = await tutor.setUser(user)
         return result
       }
     }
-  
   }
 }
 

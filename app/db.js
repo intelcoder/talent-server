@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize'
 require('dotenv').config()
-export const db = new Sequelize('postgres', 'postgres', 'fiddler', {
+export const db = new Sequelize('postgres', 'admin', 'adminer', {
   host: process.env.POSTGRES_HOST,
   dialect: 'postgres',
   pool: {
